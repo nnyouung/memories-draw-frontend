@@ -5,9 +5,8 @@
     <title>Wrtie</title>
 
     <script>
-        var imgUrl = "";
-
         // 이미지 프리뷰
+        var imgUrl = "";
         function showImagePreview(input) {
             var preview = document.getElementById('img-preview');
             var files = input.files;
@@ -33,24 +32,32 @@
         }
 
         // 드롭다운 메뉴 관련
-        function changeText(text) {
+        var futureDate = ""
+        function changeText(text, date) {
             document.querySelector('.dropbtn').innerHTML = text;
+            futureDate = date;
+        }
+
+        // 라디오버튼(익명/나에게) 관련
+        var destin = ""
+        function destination(text) {
+            destin = text;
         }
 
         // Fetch API를 사용하여 서버에 데이터 전송
         function sendToServer() {
             var textareaText = document.getElementById("custom-textarea").value;
-            fetch('http://192.168.140.251/8080/', {
+            fetch('http://192.168.140.251/8080/main/filter/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: 
                     JSON.stringify({
-                        date: "data",
-                        unknown: "data",
-                        img: imgUrl,
-                        text: textareaText
+                        "content": textareaText,
+                        "destination": destin,
+                        "image": imgUrl,
+                        "open_date": futureDate
                     })
             })
             .then(response => response.json())
@@ -68,13 +75,13 @@
     <h1>추억 보내기</h1>
     <div>
         <label for="write-btn-2" class="radio-label-2">
-            <input type="radio" id="write-btn-2" name="who" checked="checked" style="opacity: 0;" />
+            <input type="radio" id="write-btn-2" name="who" checked="checked" style="opacity: 0;" onclick="destination('unknown')"/>
             <div class="text-over-image">익명</div>
             <img class="radio-btn" src="img/write_btn_2.png" alt="익명">
         </label>
 
         <label for="write-btn-1" class="radio-label-1">
-            <input type="radio" id="write-btn-1" name="who" style="opacity: 0;"/>
+            <input type="radio" id="write-btn-1" name="who" style="opacity: 0;" onclick="destination('tome')" />
             <div class="text-over-image">나에게</div>
             <img class="radio-btn" src="img/write_btn_1.png" alt="나에게">
         </label>
@@ -112,10 +119,10 @@
               날짜 지정
             </button>
             <div class="dropdown-content">
-              <a href="#" onclick="changeText('1개월 후')">1개월 후</a>
-              <a href="#" onclick="changeText('3개월 후')">3개월 후</a>
-              <a href="#" onclick="changeText('6개월 후')">6개월 후</a>
-              <a href="#" onclick="changeText('1년 후')">1년 후</a>
+              <a href="#" onclick="changeText('1개월 후', '1month')">1개월 후</a>
+              <a href="#" onclick="changeText('3개월 후', '3month')">3개월 후</a>
+              <a href="#" onclick="changeText('6개월 후', '6month')">6개월 후</a>
+              <a href="#" onclick="changeText('1년 후', '1year')">1년 후</a>
             </div>
           </div>
 
