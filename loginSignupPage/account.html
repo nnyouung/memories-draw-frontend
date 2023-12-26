@@ -29,7 +29,7 @@
             .then(data => {
                 console.log('서버 응답: ', data);
                 alert('회원가입 성공!')
-                // 로그인 페이지로 이동하기
+                location.href='../loginSignupPage/login.html'
             })
             .catch(error => {
                 console.error('서버로 전송하는 중 오류 발생: ', error);
