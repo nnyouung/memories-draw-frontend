@@ -3,8 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>추억 뽑기</title>
+    <title>회원가입</title>
     <link rel="stylesheet" href="account.css">
+
+    <script>
+        // Fetch API를 사용하여 서버에 데이터 전송
+        function sendToServer() {
+            var email = document.getElementById("email").value;
+            var nickname = document.getElementById("nickname").value;
+            var password = document.getElementById("password").value;
+            var confirmPw = document.getElementById("confirm-password").value;
+            fetch('http://192.168.140.52:8080/accounts/register/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: 
+                    JSON.stringify({
+                        "email": email,
+                        "name": nickname,
+                        "password": password,
+                    })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('서버 응답: ', data);
+                alert('회원가입 성공!')
+                // 로그인 페이지로 이동하기
+            })
+            .catch(error => {
+                console.error('서버로 전송하는 중 오류 발생: ', error);
+            });
+        }
+    </script>
 </head>
 <body>
         <div class="header">
