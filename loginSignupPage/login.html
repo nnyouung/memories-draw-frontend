@@ -27,7 +27,7 @@
             .then(data => {
                 console.log('서버 응답: ', data);
                 alert('로그인 성공!')
-                // 메인 페이지로 이동하기
+                location.href='../mainPage/main.html'
             })
             .catch(error => {
                 console.error('서버로 전송하는 중 오류 발생: ', error);

@@ -37,10 +37,10 @@
         <div class="Rectangle47" style="width: 260px; height: 80px; left: 589px; top: 60px; position: absolute; background: #D6C4A3; border: 7px #734B45 solid"></div>
         <div style="width: 200px; height: 63px; left: 640px; top: 72px; position: absolute; color: #734B45; font-size: 45px; font-family: 'yangjin'; font-weight: 600; word-wrap: break-word">추억 뽑기</div>
         <div style="width: 250px; height: 34px; left: 1190px; top: 58px; position: absolute; word-wrap: break-word">
-            <button onclick="openMypage()" style="border: none; background: none; color: #C61511; font-size: 35px; font-family: 'yangjin'; font-weight: 600; cursor: pointer;">
+            <button onclick="location.href='../myPage/my_page.html'" style="border: none; background: none; color: #C61511; font-size: 35px; font-family: 'yangjin'; font-weight: 600; cursor: pointer;">
                 내 추억 저장소 </button></div>
         <div style="left: 1170px; top: 110px; position: absolute; color: black; font-size: 22px; font-family: 'yangjin'; font-weight: 600; word-wrap: break-word">
-        <a href="../writePage/WritePage.html" target="blank"><image src="coin.png" width="100"></a></div>
+        <image src="coin.png" onclick="location.href='../myPage/my_page.html'" width="100"></div>
         <div style="width: 146px; height: 36px; left: 1280px; top: 130px; position: absolute; color: black; font-size: 32px; font-family: 'yangjin'; font-weight: 600; word-wrap: break-word" id="amount">1000원</div>
         <div class="Frame1" style="width: 100px; height: 100px; left: 632px; top: 189px; position: absolute"></div>
     </div>
@@ -207,10 +207,6 @@ function updateAmount(newAmount) {
         if (amountElement) {
             amountElement.textContent = newAmount + '원';
         }
-    }
-
-    function openMypage(){
-        window.location.href="../myPage/my_page.html";
     }
 
     </script>
