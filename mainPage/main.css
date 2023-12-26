@@ -1,0 +1,65 @@
+
+@font-face { 
+    font-family: 'yangjin'; 
+    src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); 
+    font-weight: 100; 
+    font-style: normal; 
+}
+* {
+	font-family: 'yangjin';
+}
+/* 회전 애니메이션*/
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(90deg); }
+    50% { transform: rotate(180deg); }
+    75% { transform: rotate(270deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes shaker{
+    0% { transform: rotate(10deg); }
+    100% { transform: rotate(-10deg); }
+}
+
+/* rotate 클래스를 적용하면 회전 애니메이션이 적용됩니다. */
+.rotate {
+    animation: rotate 3s linear infinite;
+}
+.shaker {
+    animation: shaker 0.5s ease-in-out infinite alternate;
+}
+.arrow-button, .transparent-button {
+    border: 0;
+    background-color: transparent;
+  }
+  
+  .arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  
+  .left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }
+  
+  .modal-content {
+    height: 500px;
+  }
+  
+  .modal-header {
+    background-color: rgba(198, 184, 150, 1);
+  }
+  
+  .modal-body {
+    background-color: rgba(198, 184, 150, 1);
+    border-bottom-left-radius: var(--bs-modal-inner-border-radius);
+      border-bottom-right-radius: var(--bs-modal-inner-border-radius);
+  }
