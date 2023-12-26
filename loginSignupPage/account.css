@@ -32,16 +32,6 @@ body {
     flex-direction: row;
 }
 
-
-input {
-    font-size: 20px;
-    border-radius: 10px;
-    border: none;
-    background: #F4FFFF;
-    padding: 3%;
-    margin: 1%;
-}
-
 .input_group {
     width: 40%;
     height: 40%;
