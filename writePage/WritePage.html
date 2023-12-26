@@ -44,9 +44,20 @@
             destin = text;
         }
 
+        // 보내기 클릭 시, 마지막 확인
+        function removeCheck() {
+            if (confirm("한 번 넣은 뽑기는 수정이 불가능합니다. 뽑기에 넣으시겠습니까?") == true){
+                sendToServer()
+//                document.removefrm.submit();
+            } else{
+                return false;
+            }
+        }
+
         // Fetch API를 사용하여 서버에 데이터 전송
         function sendToServer() {
             var textareaText = document.getElementById("custom-textarea").value;
+            console.log(textareaText)
             fetch('http://192.168.140.251/8080/main/filter/', {
                 method: 'POST',
                 headers: {
@@ -63,6 +74,8 @@
             .then(response => response.json())
             .then(data => {
                 console.log('서버 응답: ', data);
+                alert('뽑기 넣기 성공!')
+                // 메인 페이지로 이동하기
             })
             .catch(error => {
                 console.error('서버로 전송하는 중 오류 발생: ', error);
@@ -93,7 +106,7 @@
     </div>
     <img id="img-preview" src="img/write_retro_icon.png" height=15%>
 
-    <button type="button">
+    <button type="button" onclick="removeCheck()">
         <p id="write-btn-send" style="z-index: 3; position: absolute; top: 79.8%;">보내기</p>
         <img id="write-btn-send" src="img/write_btn_send.png" >
     </button>
@@ -119,10 +132,11 @@
               날짜 지정
             </button>
             <div class="dropdown-content">
-              <a href="#" onclick="changeText('1개월 후', '1month')">1개월 후</a>
-              <a href="#" onclick="changeText('3개월 후', '3month')">3개월 후</a>
-              <a href="#" onclick="changeText('6개월 후', '6month')">6개월 후</a>
-              <a href="#" onclick="changeText('1년 후', '1year')">1년 후</a>
+                <a href="#" onclick="changeText('지금', 'minute')">지금</a>
+                <a href="#" onclick="changeText('1개월 후', '1month')">1개월 후</a>
+                <a href="#" onclick="changeText('3개월 후', '3month')">3개월 후</a>
+                <a href="#" onclick="changeText('6개월 후', '6month')">6개월 후</a>
+                <a href="#" onclick="changeText('1년 후', '1year')">1년 후</a>
             </div>
           </div>
 
