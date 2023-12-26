@@ -1,0 +1,227 @@
+@font-face { font-family: 'yangjin'; src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); font-weight: 100; font-style: normal; }
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+* {
+	font-family: 'yangjin';
+}
+
+body {
+    background-color: #DACAA9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    letter-spacing:.5rem;
+    font-size: 50px;
+    position: absolute;
+    left: 8%;
+    color: #C31610;
+    writing-mode: vertical-rl;
+  }
+
+p {
+    color: #FFF;
+}
+
+.dropdown{
+    position: absolute;
+    top: 11%;
+    left: 66%;
+    z-index : 4;
+}
+
+.dropbtn{
+    border : 1px solid #848961;
+    border-radius : 4px;
+    background-color: #fff;
+    font-weight: 300;
+    color : #000;
+    padding : 10px;
+    width : 100px;
+    text-align: left;
+    cursor : pointer;
+    font-size : 12px;
+}
+.dropdown-content{
+    display : none;
+    position : absolute;
+    z-index : 4;
+    font-weight: 400;
+    background-color: #f9f9f9;
+    min-width : 100px;
+}
+
+.dropdown-content a{
+    display : block;
+    text-decoration : none;
+    color : rgb(37, 37, 37);
+    font-size: 12px;
+    padding : 12px 20px;
+}
+
+.dropdown-content a:hover{
+    background-color : #ececec
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.filebox label {  /* 이미지올리기 */
+    position: absolute;
+    /* top: 53%;
+    left: 80%; */
+    top: 59%;
+    left: 83%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #246058;
+    cursor: pointer;
+}
+
+.filebox input[type="file"] {  /* 기존 파일선택(이미지올리기) 삭제 */
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+#img-preview {  /* 이미지 미리보기 */
+    /* position: absolute;
+    top: 48%;
+    left: 77.5%; */
+    position: absolute;
+    top: 47%;
+    left: 83%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    max-width: 90%;
+    max-height: 200px;
+}
+
+#current-date {  /* 오늘 날짜 */
+    position: absolute;
+    color: #000;
+    top: 11%;
+    left: 28%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+}
+
+#custom-textarea {  /* 글쓰기 입력창 */
+    width: 48%;
+    height: 62%;
+    position: absolute;
+    top: 43%;
+    left: 55%;
+    transform: translate(-62.5%, -40%);
+    letter-spacing : .1rem;  /* 자간 */
+    line-height : 2em;  /* 행간 */
+    font-size: 13px;
+    background-color: transparent;
+    resize: none;
+    color: black;
+    border: none;
+    outline: none;
+    z-index: 3;
+  }
+
+#char_cnt {  /* 글자수 세기 */
+    position: absolute;
+    /* top: 74%;
+    left: 70%; */
+    top: 84%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    font-size: 13px;
+    color:#000;
+    z-index: 3;
+}
+
+#write-white {  /* 게임기 흰색 배경 */
+    /* width: 65%;
+    height: 71%; */
+    width: 54%;
+    height: 83%;
+    position: absolute;
+    /* top: 46%;
+    left: 55%; */
+    top: 50%;
+    left: 49%;
+    transform: translate(-50%, -50.5%);
+    z-index: 2;
+}
+
+#write-game {  /* 게임기 녹색 배경 */
+    width: 70%;
+    height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.radio-label-2 {  /* 라디오 버튼_익명 */
+    position: absolute;
+    /* top: 87%;
+    left: 45%; */
+    top: 18%;
+    left: 82%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.radio-label-1 {  /* 라디오 버튼_나에게 */
+    position: absolute;
+    /* top: 87%;
+    left: 35%; */
+    top: 28%;
+    left: 82%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.text-over-image {  /* 라디오 버튼 글자 */
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    color: #848961;
+    font-size: 12px;
+}
+
+input[type=radio]:checked + .text-over-image {  /* 라디오 버튼 글자 클릭 시 */
+    color: #FFF;
+}
+
+#write-btn-send {  /* 보내기 */
+    width: 6%;
+    height: 12%;
+    position: absolute;
+    /* top: 87%;
+    left: 75%; */
+    top: 77%;
+    left: 83%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    cursor: pointer;
+}
+
+
