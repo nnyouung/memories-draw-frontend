@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wrtie</title>
+
+    <script>
+        var imgUrl = "";
+
+        // 이미지 프리뷰
+        function showImagePreview(input) {
+            var preview = document.getElementById('img-preview');
+            var files = input.files;
+
+            if (files.length > 0) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    imgUrl = e.target.result;
+                };
+                reader.readAsDataURL(files[0]);
+            } else {
+                preview.src = '';
+            }
+        }
+
+        // 글자수 세기
+        function countChars() {
+            var text = document.getElementById("custom-textarea").value;
+            var charCount = text.length;
+    
+            document.getElementById("char_cnt").innerHTML = charCount + "/1000";
+        }
+
+        // 드롭다운 메뉴 관련
+        function changeText(text) {
+            document.getElementById('dropbtn').innerHTML = text;
+        }
+
+        // Fetch API를 사용하여 서버에 데이터 전송
+        function sendToServer() {
+            var textareaText = document.getElementById("custom-textarea").value;
+            fetch('http://192.168.140.251/8080/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: 
+                    JSON.stringify({
+                        date: "data",
+                        unknown: "data",
+                        img: imgUrl,
+                        text: textareaText
+                    })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('서버 응답: ', data);
+            })
+            .catch(error => {
+                console.error('서버로 전송하는 중 오류 발생: ', error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <link rel="stylesheet" href="WritePage.css">
+    <h1>추억 보내기</h1>
+    <div>
+        <label for="write-btn-2" class="radio-label-2">
+            <input type="radio" id="write-btn-2" name="who" style="opacity: 0;" />
+            <div class="text-over-image">익명</div>
+            <img class="radio-btn" src="img/write_btn_2.png" alt="익명">
+        </label>
+
+        <label for="write-btn-1" class="radio-label-1">
+            <input type="radio" id="write-btn-1" name="who" style="opacity: 0;"/>
+            <div class="text-over-image">나에게</div>
+            <img class="radio-btn" src="img/write_btn_1.png" alt="나에게">
+        </label>
+    </div>  
+
+    <div class="filebox" name="picture">
+        <label for="file">이미지 올리기</label> 
+        <input type="file" id="file" onchange="showImagePreview(this);" >
+    </div>
+    <!-- <img id="img-preview" height=15%> -->
+    <img id="img-preview" src="img/write_retro_icon.png" height=15%>
+
+    <button type="button">
+        <!-- <p id="write-btn-send" style="z-index: 3; position: absolute; top: 88.7%;">보내기</p> -->
+        <p id="write-btn-send" style="z-index: 3; position: absolute; top: 79.8%;">보내기</p>
+        <img id="write-btn-send" src="img/write_btn_send.png" >
+    </button>
+
+    <div>
+
+        <div>
+            <p id="current-date"></p>
+            <textarea name="content" id="custom-textarea" maxlength="1000" placeholder="추억을 입력해주세요." oninput="countChars()"></textarea>
+            <p id="char_cnt">0/1000</p>
+            <script>
+                date = new Date();
+                year = date.getFullYear();
+                month = date.getMonth() + 1;
+                day = date.getDate();
+                var inputValue = year + "/" + month + "/" + day;
+                document.getElementById("current-date").innerText = inputValue;  // <p> 태그에 값을 넣기
+            </script>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn"> 
+              날짜 지정
+            </button>
+            <div class="dropdown-content">
+              <a href="#" onclick="changeText('1개월 후')">1개월 후</a>
+              <a href="#" onclick="changeText('3개월 후')">3개월 후</a>
+              <a href="#" onclick="changeText('6개월 후')">6개월 후</a>
+              <a href="#" onclick="changeText('1년 후')">1년 후</a>
+            </div>
+          </div>
+
+        <div>
+            <img id="write-white" src="img/write_white.png" >
+        </div>
+
+        <div>
+            <img id="write-game" src="img/write_game.png" >
+        </div>
+
+    </div>
+
+</body>
+</html>
