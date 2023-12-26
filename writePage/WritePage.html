@@ -34,7 +34,7 @@
 
         // 드롭다운 메뉴 관련
         function changeText(text) {
-            document.getElementById('dropbtn').innerHTML = text;
+            document.querySelector('.dropbtn').innerHTML = text;
         }
 
         // Fetch API를 사용하여 서버에 데이터 전송
@@ -68,7 +68,7 @@
     <h1>추억 보내기</h1>
     <div>
         <label for="write-btn-2" class="radio-label-2">
-            <input type="radio" id="write-btn-2" name="who" style="opacity: 0;" />
+            <input type="radio" id="write-btn-2" name="who" checked="checked" style="opacity: 0;" />
             <div class="text-over-image">익명</div>
             <img class="radio-btn" src="img/write_btn_2.png" alt="익명">
         </label>
