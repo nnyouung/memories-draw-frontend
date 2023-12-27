@@ -48,36 +48,16 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 id="created-date">(20XX.XX.XX X요일)</h4>
+          <h4 id="created-date">(20XX.XX.XX)</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="capsule-photo-container"><img class="capsule-photo" src="." alt="추억 사진" /></div>
-
-          <button class="arrow-button" data-bs-target="#timeCapsuleModalToggle2" data-bs-toggle="modal">
-            <i class="arrow right"></i></button>
+          <div id="capsule-content">추억 내용</div>
         </div>
       </div>
     </div>
   </div>
 
-
-  <div class="modal fade" id="timeCapsuleModalToggle2" aria-hidden="true" aria-labelledby="timeCapsuleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="created-date">(20XX.XX.XX X요일)</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <button class="arrow-button" data-bs-target="#timeCapsuleModalToggle" data-bs-toggle="modal">
-            <i class="arrow left"></i></button>
-          <div id="capsule-content">추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
   <script>
@@ -103,8 +83,14 @@
         
           for (var j=0; j < data.array.length; j++) {
             createCapsule(data.array[j]);
+            const createdDateModal = document.getElementById("created-date");
+            createdDateModal.textContent = data.array[j].writedate.substr(0, 10);
           }
+          const userNicknameElement = document.getElementById("user-nickname");
+          userNicknameElement.textContent = userNickname;
 
+          
+          
 
         })
         .catch(error => {
