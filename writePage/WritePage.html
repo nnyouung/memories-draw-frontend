@@ -58,7 +58,7 @@
         function sendToServer() {
             var textareaText = document.getElementById("custom-textarea").value;
             console.log(textareaText)
-            fetch('http://192.168.140.52:8080/main/filter/', {
+            fetch('http://192.168.140.52:8080/main/write_capsule/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
