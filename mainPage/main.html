@@ -48,11 +48,11 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="created-date">(20XX.XX.XX X요일)</h4>
+              <h4 class="created-date">writedate</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <div class="capsule-photo-container"><img class="capsule-photo" src="." alt="추억 사진" /></div>
+            <div class="capsule-photo-container"><img class="capsule-photo" src="maxresdefault.jpg" alt="추억 사진" width="450px"/></div>
               
               <button class="arrow-button" data-bs-target="#timeCapsuleModalToggle2" data-bs-toggle="modal">
                 <i class="arrow right"></i></button>
@@ -66,13 +66,13 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="created-date">(20XX.XX.XX X요일)</h4>
+              <h4 class="created-date">writedate</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <button class="arrow-button" data-bs-target="#timeCapsuleModalToggle" data-bs-toggle="modal">
                 <i class="arrow left"></i></button>
-              <div class="capsule-content">추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용</div>
+              <div class="capsule-content">content</div>
             </div>
           </div>
         </div>
@@ -80,9 +80,29 @@
     
 
     <script>
+
+function sendToServer() {
+    fetch('http://192.168.140.52:8080/main/show_capsule/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body:{}
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('서버 응답: ', data);
+        document.getElementByClassName('created-date').textContent=writedate;
+        document.getElementByClassName('capsule-content').textContent=content;
+
+    })
+    .catch(error => {
+        console.error('서버로 전송하는 중 오류 발생: ', error);
+    });
+}
+
         let amount=1000;
         function sharot() {
-            // 회전할 이미지들
             if (amount < 500) {
                 alert('동전이 부족해요. 편지를 쓰러갈까요?');
                 return; // 함수 종료
@@ -143,7 +163,8 @@
     image.src = 'capsules.png'; // 이미지 경로 설정
     image.style.width='300px';
     image.style.height='300px';
-    const capsuleButton = document.createElement('button');
+    var capsuleButton = document.createElement('button');
+    capsuleButton.id = 'capsulebutton';
     capsuleButton.style.border = '0';
     capsuleButton.style.zIndex = '2';
     capsuleButton.style.backgroundColor = 'transparent';
@@ -188,10 +209,12 @@
             document.body.appendChild(capsuleButton);
             return;
         }
-        capsuleButton.addEventListener('click', function () {
-                // 이미지 클릭 시 숨기고 함수 종료
-                capsuleButton.style.display = 'none';
-            });
+        // capsuleButton.addEventListener('click', function () {
+        //         // 이미지 클릭 시 숨기고 함수 종료
+        //         console.log("???");
+        //         sendToServer();
+        //         capsuleButton.style.display = 'none';
+        //     });
         // 애니메이션 프레임 요청
         requestAnimationFrame(animate);
     }
@@ -200,7 +223,14 @@
     image.onload = function () {
         animate();
     };
+
+    capsuleButton.addEventListener('click', function () {
+                // 이미지 클릭 시 숨기고 함수 종료
+                sendToServer();
+                capsuleButton.style.display = 'none';
+            });
 }
+
 
 function updateAmount(newAmount) {
         const amountElement = document.getElementById('amount');
@@ -209,6 +239,7 @@ function updateAmount(newAmount) {
         }
     }
 
+// capsuleButton.onclick()
     </script>
 </body>
 </html>
