@@ -48,36 +48,16 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 id="created-date">(20XX.XX.XX X요일)</h4>
+          <h4 id="created-date">(20XX.XX.XX)</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="capsule-photo-container"><img class="capsule-photo" src="." alt="추억 사진" /></div>
-
-          <button class="arrow-button" data-bs-target="#timeCapsuleModalToggle2" data-bs-toggle="modal">
-            <i class="arrow right"></i></button>
+          <div id="capsule-content">추억 내용</div>
         </div>
       </div>
     </div>
   </div>
 
-
-  <div class="modal fade" id="timeCapsuleModalToggle2" aria-hidden="true" aria-labelledby="timeCapsuleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="created-date">(20XX.XX.XX X요일)</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <button class="arrow-button" data-bs-target="#timeCapsuleModalToggle" data-bs-toggle="modal">
-            <i class="arrow left"></i></button>
-          <div class="capsule-content">추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
   <script>
@@ -95,45 +75,41 @@
         })
         .then(data => {
           const userNickname = data.name;
-          capsules = {};
+          console.log(data.array[3].lock);
 
-          for (let j = 0; j < data.array.length; j++) {
-            capsules[`capsule${j}`] = data.array[j];
-          }
-          
           //createCapsule(data.array[3].lock);          
           //createCapsule(data.array[4].lock);
           //createCapsule(data.array[5].lock);
+        
+          for (var j=0; j < data.array.length; j++) {
+            createCapsule(data.array[j]);
+            const createdDateModal = document.getElementById("created-date");
+            createdDateModal.textContent = data.array[j].writedate.substr(0, 10);
+          }
+          const userNicknameElement = document.getElementById("user-nickname");
+          userNicknameElement.textContent = userNickname;
+
+          
+          
+
         })
         .catch(error => {
           console.error('There has been a problem with your fetch operation:', error);
         });
-
-        
     }
+  
 
     function createCapsule(capsules) {
-      for (var i=0; i < capsules.length; i++) {
-        if (capsules[i].lock) {
-          createLockedCapsule();
+        if (capsules.lock) {
+          createLockedCapsule(capsules.writedate);
         } else {
-          createUnlockedCapsule();
+          createUnlockedCapsule(capsules.writedate);
         }
-      }
     }
 
-    //function createCapsule(lockValue) {
-     // if (lockValue) {
-      //  createLockedCapsule();
-      //} else {
-      //  createUnlockedCapsule();
-     // }
-    //}
 
-    
-          
 
-    function createUnlockedCapsule() {  // 락 걸린 캡슐 만들기
+    function createUnlockedCapsule(writedate) {  // 락 걸린 캡슐 만들기
       const tabCon = document.querySelector('.tabCon');
       const unlockedCapsuleImages = ["1-unlocked.png", "2-unlocked.png"];
       const chosenImage = unlockedCapsuleImages[i];
@@ -154,7 +130,7 @@
       unlockedCapsule.style.width = '100px';
       unlockedCapsule.style.marginBottom = '10px';
 
-      const createdDate = document.createTextNode('20XX.XX.XX');  // 작성 날짜 받아오기
+      const createdDate = document.createTextNode(writedate.substr(0, 10));  // 작성 날짜 받아오기
 
       unlockedCapsuleContainerButton.appendChild(unlockedCapsule);
       unlockedCapsuleContainerButton.appendChild(createdDate);
@@ -166,7 +142,7 @@
       //}
     }
 
-    function createLockedCapsule() {  // 잠긴 캡슐 생성인데 툴팁이 안됨
+    function createLockedCapsule(writedate) {  // 잠긴 캡슐 생성인데 툴팁이 안됨
       const tabCon = document.querySelector('.tabCon');
       const LockedCapsuleImages = ["1-locked.png", "2-locked.png"];
       const chosenImage = LockedCapsuleImages[i];
@@ -189,7 +165,7 @@
       lockedcapsule.style.width = '100px';
       lockedcapsule.style.marginBottom = '10px';
 
-      const createdDate = document.createTextNode('20XX.XX.XX');  // 작성 날짜 받아오기
+      const createdDate = document.createTextNode(writedate.substr(0, 10));  // 작성 날짜 받아오기
 
       lockedCapsuleContainerButton.appendChild(lockedcapsule);
       lockedCapsuleContainerButton.appendChild(createdDate);
