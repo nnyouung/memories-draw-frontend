@@ -94,43 +94,32 @@
         })
         .then(data => {
           const userNickname = data.name;
-          capsules = {};
 
-          for (let j = 0; j < data.array.length; j++) {
-            capsules[`capsule${j}`] = data.array[j];
-          }
-          
+          console.log(data.array[3].lock);
+
           //createCapsule(data.array[3].lock);          
           //createCapsule(data.array[4].lock);
           //createCapsule(data.array[5].lock);
+        
+          for (var j=0; j < data.array.length; j++) {
+            createCapsule(data.array[j]);
+          }
         })
         .catch(error => {
           console.error('There has been a problem with your fetch operation:', error);
         });
-
-        
     }
+  
 
     function createCapsule(capsules) {
-      for (var i=0; i < capsules.length; i++) {
-        if (capsules[i].lock) {
+        if (capsules.lock) {
           createLockedCapsule();
         } else {
           createUnlockedCapsule();
         }
-      }
     }
 
-    //function createCapsule(lockValue) {
-     // if (lockValue) {
-      //  createLockedCapsule();
-      //} else {
-      //  createUnlockedCapsule();
-     // }
-    //}
 
-    
-          
 
     function createUnlockedCapsule() {  // 락 걸린 캡슐 만들기
       const tabCon = document.querySelector('.tabCon');
